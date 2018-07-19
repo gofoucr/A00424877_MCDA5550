@@ -16,7 +16,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity_calculate_bmi"></activity>
+        <activity android:name=".activity_calculate_bmi" />
+        <activity
+            android:name=".ListActivity"
+            android:label="@string/title_activity_list" />
+        <activity
+            android:name=".BMIListActivity"
+            android:label="@string/title_activity_bmilist"></activity>
     </application>
 
 </manifest>

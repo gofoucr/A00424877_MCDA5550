@@ -6,78 +6,69 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <TableLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-        <TableRow
+        <EditText
+            android:id="@+id/Name"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" >
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Name"
+            android:inputType="textPersonName"
+            android:singleLine="false" />
 
-            <EditText
-                android:id="@+id/Name"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:hint="Name"
-                android:inputType="textPersonName"
-                android:singleLine="false" />
-        </TableRow>
+        <EditText
+            android:id="@+id/BirthDay"
+            style="@android:style/Widget.Holo.EditText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:ems="10"
+            android:hint="Birthday"
+            android:inputType="datetime|date"
+            android:singleLine="false"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-        <TableRow
+        <EditText
+            android:id="@+id/HealthCard"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" >
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="HealthCard"
+            android:inputType="number" />
 
-            <EditText
-                android:id="@+id/BirthDay"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginEnd="16dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
-                android:ems="10"
-                android:hint="Birthday"
-                android:inputType="date"
-                android:singleLine="false"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-        </TableRow>
-
-        <TableRow
+        <EditText
+            android:id="@+id/Password"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" >
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Password"
+            android:inputType="textPassword" />
 
-            <EditText
-                android:id="@+id/HealthCard"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:hint="HealthCard"
-                android:inputType="number" />
-        </TableRow>
-
-        <TableRow
+        <Button
+            android:id="@+id/button"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" >
+            android:layout_height="wrap_content"
+            android:onClick="onClickList"
+            android:text="Button"
+            tools:layout_editor_absoluteX="239dp"
+            tools:layout_editor_absoluteY="234dp" />
 
-            <EditText
-                android:id="@+id/Password"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:hint="Password"
-                android:inputType="textPassword" />
-        </TableRow>
-    </TableLayout>
-
-    <Button
-        android:id="@+id/Submit"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:onClick="onClickEnter"
-        android:text="Submit"
-        tools:layout_editor_absoluteX="32dp"
-        tools:layout_editor_absoluteY="231dp" />
+        <Button
+            android:id="@+id/Submit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="onClickEnter"
+            android:text="Submit"
+            tools:layout_editor_absoluteX="0dp"
+            tools:layout_editor_absoluteY="219dp" />
+    </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>

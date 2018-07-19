@@ -11,6 +11,7 @@ import android.widget.EditText;
 public class MainActivity extends AppCompatActivity {
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,6 +45,13 @@ public class MainActivity extends AppCompatActivity {
     public void onClickEnter(View view){
         Intent intent = new Intent( this,activity_calculate_bmi.class);
         startActivity(intent);
+    }
+
+    public void onClickList(View view)
+    {
+        Intent intent = new Intent(this,BMIListActivity.class);
+        startActivity(intent);
+
     }
 }
 
