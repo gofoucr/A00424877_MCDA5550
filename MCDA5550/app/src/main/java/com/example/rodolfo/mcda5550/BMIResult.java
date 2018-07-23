@@ -43,7 +43,7 @@ public class BMIResult {
 
     public double getResult()
     {
-        return weight/(height*height);
+        return weight/(height*2);
 
     }
 
