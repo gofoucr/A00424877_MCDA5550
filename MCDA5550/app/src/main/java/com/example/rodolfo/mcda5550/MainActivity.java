@@ -16,6 +16,10 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        Bundle b = getIntent().getExtras();
+        double height = b.getDouble("height");
+        EditText heightComp = (EditText) findViewById(R.id.HealthCard);
+        heightComp.setText(Double.toString(height));
 
         InClassDatabaseHelper helper = new InClassDatabaseHelper(this);
         SQLiteDatabase db = helper.getWritableDatabase();
