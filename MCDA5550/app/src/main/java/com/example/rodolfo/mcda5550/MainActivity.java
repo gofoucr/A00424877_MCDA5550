@@ -20,13 +20,14 @@ public class MainActivity extends AppCompatActivity {
         Bundle b = getIntent().getExtras();
         String UsrEmail = b.getString("email");
         EditText heightComp = findViewById(R.id.Email);
-        heightComp.setText(UsrEmail);
+        //heightComp.setText(UsrEmail);
+        String whereClause = "EMAIL ="+ "'"+UsrEmail+"'";
 
         InClassDatabaseHelper helper = new InClassDatabaseHelper(this);
         SQLiteDatabase db = helper.getWritableDatabase();
 
         Cursor cursor = db.query(InClassDatabaseHelper.TABLE_NAME,new String[]{"NAME","PASSWORD","DATE","EMAIL","HEALTH_CARD_NUMB"},
-                null,null,null,null,null);
+                whereClause,null,null,null,null);
 
 
 
@@ -71,7 +72,6 @@ public class MainActivity extends AppCompatActivity {
         newM = EmialComp.getText().toString();
         Bundle b = new Bundle();
         b.putString("email",newM);
-
         intent.putExtras(b);
 
         startActivity(intent);

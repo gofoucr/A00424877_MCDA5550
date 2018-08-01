@@ -65,15 +65,15 @@ public class InClassDatabaseHelper extends SQLiteOpenHelper {
         db.insert(TABLE_NAME,null,personValues);
     }
 
-    public void InsertNewBMI(SQLiteDatabase db,String IDusr, Integer NewHei, Integer NewWei)
+    public void InsertNewBMI(SQLiteDatabase db,String IDusr, Double NewHei, Double NewWei)
     {
         //SQLiteDatabase db;
         //db = new SQLiteDatabase();
         Date today = new Date();
         ContentValues BMIValues = new ContentValues();
         BMIValues.put("EMAIL",IDusr);
-        BMIValues.put("HEIGHT",NewHei.doubleValue());
-        BMIValues.put("WEIGHT",NewWei.doubleValue());
+        BMIValues.put("HEIGHT",NewHei);
+        BMIValues.put("WEIGHT",NewWei);
         BMIValues.put("DATE",today.getTime());
 
         db.insert(TABLE_NAME2,null,BMIValues);
@@ -119,10 +119,6 @@ public class InClassDatabaseHelper extends SQLiteOpenHelper {
 
     public Cursor GetAllBMI(SQLiteDatabase db,String vEmail)
     {
-        String[] tableColumns = new String[] {
-                "HEIGHT",
-                "WEIGHT"
-        };
         String whereClause = "EMAIL ="+ "'"+vEmail+"'";
         //String[] whereArgs = new String[]{};
         //whereArgs[1] = vEmail.toString();
@@ -131,7 +127,7 @@ public class InClassDatabaseHelper extends SQLiteOpenHelper {
         //String query = "Select HEIGHT,WEIGHT from BODYMASS where EMAIL = " +"'" + vEmail+"'";
 
         Cursor cursor = db.query(InClassDatabaseHelper.TABLE_NAME2,new String[]{"HEIGHT","WEIGHT"},
-                null,null,null,null,null);
+                whereClause,null,null,null,null);
 
        return cursor;
     }

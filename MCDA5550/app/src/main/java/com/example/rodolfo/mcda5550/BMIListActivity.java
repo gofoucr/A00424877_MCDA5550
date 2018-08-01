@@ -10,10 +10,15 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+
 public class BMIListActivity extends ListActivity {
 
 
-    BMIResult[] results = new BMIResult[];//{new BMIResult(5.5,100),new BMIResult(4.3,156)};
+    //BMIResult[] results;//{new BMIResult(5.5,100),new BMIResult(4.3,156)};
+    ArrayList<BMIResult> results = new ArrayList<BMIResult>();
+    //Array[] results = new BMIResult[];
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,35 +47,18 @@ public class BMIListActivity extends ListActivity {
         //Cursor cursor = db.query(InClassDatabaseHelper.TABLE_NAME2,null,//new String[]{"HEIGHT","WEIGHT"},
         //        null,null,null,null,null);
 
-        Cursor cursor = helper.GetAllBMI(db,UsrEmail);//db.query(InClassDatabaseHelper.TABLE_NAME2,new String[]{"HEIGHT","WEIGHT"},
-                //null,null,null,null,null);
+        Cursor cursor = helper.GetAllBMI(db,UsrEmail);
 
-       // try {
+
             while (cursor.moveToNext()) {
 
                 //if (cursor.moveToFirst()) {
                     Double usrHei = cursor.getDouble(0);
                     Double usrWei = cursor.getDouble(1);
-                    //results.(new BMIResult(usrHei, usrWei));
-                    results[idx] = new BMIResult(usrHei, usrWei);
-                    idx = idx +1;
-
-                    //String passwd = cursor.getString(1);
-
-                    //EditText results = (EditText) findViewById(R.id.Name);
-                    //results.setText(name);
-
-                    //EditText rpass = (EditText) findViewById(R.id.Password);
-                    //rpass.setText(passwd);
-                //}
+                    results.add(new BMIResult(usrHei, usrWei));
 
 
             }
-       // };
-        //finally {
-         //   cursor.close();
-         //   db.close();
-       // }
 
         cursor.close();
         db.close();
@@ -83,7 +71,7 @@ public class BMIListActivity extends ListActivity {
                                 int position,
                                 long id)
     {
-        System.out.println("Clicked on " + results[position].toString());
+        System.out.println("Clicked on " );
     }
 
 }

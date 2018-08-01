@@ -58,11 +58,18 @@ public class activity_calculate_bmi extends AppCompatActivity {
 
         Bundle b = getIntent().getExtras();
         String UsrEmail = b.getString("email");
-        //EditText heightComp = (EditText) findViewById(R.id.Email);
-        //heightComp.setText(UsrEmail);
+
+       // EditText heightComp = (EditText) findViewById(R.id.Height);
+       // heightComp.setText(UsrEmail);
         //Bundle b = new Bundle();
 
-        helper.InsertNewBMI(db,UsrEmail,R.id.Weight,R.id.Height);
+        EditText WeightVal = findViewById(R.id.Weight);
+        Double Wval = Double.parseDouble(WeightVal.getText().toString());
+
+        EditText HeightVal = findViewById(R.id.Height);
+        Double Hval = Double.parseDouble(HeightVal.getText().toString());
+
+        helper.InsertNewBMI(db,UsrEmail,Wval,Hval);
 
 
 
