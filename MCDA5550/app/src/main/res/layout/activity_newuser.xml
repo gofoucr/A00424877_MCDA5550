@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".NewUserActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -60,26 +60,17 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:hint="Email"
-            android:inputType="text" />
+            android:inputType="textEmailAddress" />
 
         <Button
-            android:id="@+id/ListBMI"
+            android:id="@+id/InsertUsr"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:onClick="onClickList"
-            android:text="See previous"
+            android:text="Insert"
             tools:layout_editor_absoluteX="239dp"
             tools:layout_editor_absoluteY="234dp" />
 
-        <Button
-            android:id="@+id/Submit"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:onClick="onClickEnter"
-            android:text="Calculate New"
-            tools:layout_editor_absoluteX="0dp"
-            tools:layout_editor_absoluteY="219dp" />
     </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>

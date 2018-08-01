@@ -3,8 +3,10 @@ package com.example.rodolfo.mcda5550;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.database.sqlite.SQLiteDatabase;
 import android.support.annotation.NonNull;
 
 import android.app.Activity;
@@ -30,6 +32,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -50,7 +54,7 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
      * TODO: remove after connecting to a real authentication system.
      */
     private static final String[] DUMMY_CREDENTIALS = new String[]{
-            "foo@example.com:hello", "bar@example.com:world"
+            "rgb@mcda550.com:hello", "bar@example.com:world"
     };
     /**
      * Keep track of the login task to ensure we can cancel it if requested.
@@ -68,10 +72,10 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         // Set up the login form.
-        mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
+        mEmailView = findViewById(R.id.email);
         populateAutoComplete();
 
-        mPasswordView = (EditText) findViewById(R.id.password);
+        mPasswordView = findViewById(R.id.password);
         mPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent) {
@@ -83,7 +87,7 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
             }
         });
 
-        Button mEmailSignInButton = (Button) findViewById(R.id.email_sign_in_button);
+        Button mEmailSignInButton = findViewById(R.id.email_sign_in_button);
         mEmailSignInButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -294,6 +298,7 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
 
         private final String mEmail;
         private final String mPassword;
+        //private Context context;
 
         UserLoginTask(String email, String password) {
             mEmail = email;
@@ -304,6 +309,10 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
         protected Boolean doInBackground(Void... params) {
             // TODO: attempt authentication against a network service.
 
+
+            InClassDatabaseHelper helper = new InClassDatabaseHelper(LoginActivity.this);
+            SQLiteDatabase db = helper.getWritableDatabase();
+
             try {
                 // Simulate network access.
                 Thread.sleep(2000);
@@ -311,16 +320,33 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
                 return false;
             }
 
-            for (String credential : DUMMY_CREDENTIALS) {
-                String[] pieces = credential.split(":");
-                if (pieces[0].equals(mEmail)) {
-                    // Account exists, return true if the password matches.
-                    return pieces[1].equals(mPassword);
+
+
+
+                // First, the app will validate if the user exist in the dabase
+                if (helper.ValidateUser(db,mEmail,mPassword))
+                {
+                    return true;
                 }
-            }
+                else{ // If not exist in the database it will check into the Dummy credentials
+                    for (String credential : DUMMY_CREDENTIALS) {
+                        String[] pieces = credential.split(":");
+                        if (pieces[0].equals(mEmail)) {
+                            //Account exists, return true if the password matches.
+                            return pieces[1].equals(mPassword);
+                        }
+                    }
+                }
+
+
 
             // TODO: register the new account here.
-            return true;
+            //If the user doesn't exist in the database neither in the dummy credentials then Call Activity to insert a new user
+            Intent intent = new Intent(LoginActivity.this,NewUserActivity.class);
+            startActivity(intent);
+
+            //return true;
+            return false; // return false to avoid the access to the app
         }
 
         @Override
@@ -330,10 +356,11 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
 
             if (success) {
                 //finish();
-                Double heightVal = 150.0;
+                //Double heightVal = 150.0;
+                String Usr = mEmail;
                 Intent yourIntent = new Intent(LoginActivity.this,MainActivity.class);
                 Bundle b = new Bundle();
-                b.putDouble("height",heightVal);
+                b.putString("email",Usr);
                 yourIntent.putExtras(b);
                 startActivity(yourIntent);
             } else {
